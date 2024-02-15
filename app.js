@@ -28,8 +28,11 @@ app.get('/', (req, res) => {
     res.render("home")
 });
 
-app.get('/makecampground', async (req, res) => {
-    const camp = new Campground({ title: "My Backyard", description: "Great" });
-    await camp.save();
-    res.send(camp);
+app.get('/campgrounds', async (req, res) => {
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', { campgrounds });
+});
+
+app.get('campgrounds/:id', async (req, res) => {
+    res.render('campgrounds/show');
 });
