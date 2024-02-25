@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError')
 const Campground = require('../models/campground');
 const Review = require("../models/review");
-const { validateReview, isLoggedIn } = require('../middleware.js');
+const { validateReview, isLoggedIn, isReviewAuthor } = require('../middleware.js');
 
 router.post('/', validateReview, catchAsync(async(req, res, next) => {
     const campground = await Campground.findById(req.params.id);
@@ -18,7 +18,7 @@ router.post('/', validateReview, catchAsync(async(req, res, next) => {
     res.redirect(`/campgrounds/${campground._id}`);
 }));
 
-router.delete('/:reviewId', isLoggedIn, catchAsync(async (req, res, next) => {
+router.delete('/:reviewId', isLoggedIn, isReviewAuthor, catchAsync(async (req, res, next) => {
     const { id, reviewId} = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
