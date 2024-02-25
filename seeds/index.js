@@ -26,10 +26,14 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
             images: [
                 {
-                  url: 'https://res.cloudinary.com/dmx4ahlac/image/upload/v1708834134/YelpCamp/atza29jeguvjggbdwgkb.png',
-                  filename: 'YelpCamp/atza29jeguvjggbdwgkb'
+                    url: 'https://res.cloudinary.com/dmx4ahlac/image/upload/v1708834134/YelpCamp/atza29jeguvjggbdwgkb.png',
+                    filename: 'YelpCamp/atza29jeguvjggbdwgkb'
                 }
-              ],
+            ],
+            geometry: { 
+                type: 'Point',
+                coordinates: [116.974706, -0.413011] 
+            },
             description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae assumenda necessitatibus laudantium, illum minima vel eos pariatur inventore debitis delectus aut corporis architecto veniam corrupti veritatis? Nam eum minus saepe.`,
             price: price
         })
@@ -38,6 +42,6 @@ const seedDB = async () => {
 }
 
 seedDB()
-.then(() => {
-mongoose.connection.close()
-});
+    .then(() => {
+        mongoose.connection.close()
+    });
