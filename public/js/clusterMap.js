@@ -1,12 +1,14 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
-    container: 'map',
+    container: 'cluster-map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11',
     center: [-103.5917, 40.6699],
     zoom: 3
 });
-console.log(campgrounds)
+
+map.addControl(new mapboxgl.NavigationControl());
+
 map.on('load', () => {
     map.addSource('campgrounds', {
         type: 'geojson',
